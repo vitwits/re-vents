@@ -11,7 +11,10 @@ const EventDashboard = ({ formOpen, setFormOpen, selectedEvent, handleSelectEven
     setEvents([...events, event]);
   };
 
-
+  const handleUpdateEvent = (updatedEvent) => {
+    setEvents(events.map(evt => evt.id === updatedEvent.id ? updatedEvent : evt));
+    handleSelectEvent(null);
+  }
 
   return (
     <Grid>
@@ -25,6 +28,7 @@ const EventDashboard = ({ formOpen, setFormOpen, selectedEvent, handleSelectEven
             setEvents={setEvents}
             handleCreateEvent={handleCreateEvent}
 						selectedEvent={selectedEvent}
+            handleUpdateEvent={handleUpdateEvent}
           />
         )}
       </Grid.Column>
