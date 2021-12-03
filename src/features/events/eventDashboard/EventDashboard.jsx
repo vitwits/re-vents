@@ -4,30 +4,12 @@ import EventList from "./EventList";
 import { useSelector } from "react-redux";
 
 const EventDashboard = () => {
-  const {events} = useSelector(state => state.event);
-
-  // const handleCreateEvent = (event) => {
-  //   setEvents([...events, event]);
-  // };
-
-  // const handleUpdateEvent = (updatedEvent) => {
-  //   setEvents(
-  //     events.map((evt) => (evt.id === updatedEvent.id ? updatedEvent : evt))
-  //   );
-  //   // handleSelectEvent(null);
-  // };
-
-  const handleDeleteEvent = (eventId) => {
-    // setEvents(events.filter((evt) => evt.id !== eventId));
-  };
+  const { events } = useSelector((state) => state.event);
 
   return (
     <Grid>
       <Grid.Column width={10}>
-        <EventList
-          events={events}
-          handleDeleteEvent={handleDeleteEvent}
-        />
+        <EventList events={events} />
       </Grid.Column>
       <Grid.Column width={6}>
         <h2>Event Filters</h2>

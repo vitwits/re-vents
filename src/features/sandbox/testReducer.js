@@ -1,6 +1,5 @@
 export const INCREMENT_COUNTER = 'INCREMENT_COUNTER';
 export const DECREMENT_COUNTER = 'DECREMENT_COUNTER';
-export const MULTIPLY_COUNTER = 'MULTIPLY_COUNTER';
 
 export function increment(amount) {
   return {
@@ -16,33 +15,21 @@ export function decrement(amount) {
   }
 }
 
-export function multiply(amount) {
-  return {
-    type: MULTIPLY_COUNTER,
-    payload: amount
-  }
-}
-
 const initialState = {
-  data: 0,
+  data: 100,
 }
 
-export default function testReducer(state = initialState, action) {
-  switch (action.type) {
+export default function testReducer(state = initialState, {type, payload}) {
+  switch (type) {
     case INCREMENT_COUNTER:
       return {
         ...state,
-        data: state.data + action.payload
+        data: state.data + payload
       };
     case DECREMENT_COUNTER:
       return {
         ...state,
-        data: state.data - action.payload
-      };
-    case MULTIPLY_COUNTER:
-      return {
-        ...state,
-        data: state.data * action.payload
+        data: state.data - payload
       };
     default:
       return state;
