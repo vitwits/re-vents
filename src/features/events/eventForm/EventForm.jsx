@@ -1,9 +1,10 @@
 import cuid from "cuid";
 import React, { useState } from "react";
-import { Form, Header, Segment, Button } from "semantic-ui-react";
+import { Header, Segment, Button, FormField } from "semantic-ui-react";
 import { Link } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { createEvent, updateEvent } from "../eventActions";
+import { Formik, Form, Field } from "formik";
 
 const EventForm = ({ match, history }) => {
   const dispatch = useDispatch();
@@ -45,70 +46,40 @@ const EventForm = ({ match, history }) => {
   return (
     <Segment clearing>
       <Header content={selectedEvent ? "Edit the event" : "Create new event"} />
-      <Form onSubmit={handleFormSubmit}>
-        <Form.Field>
-          <input
-            type='text'
-            name='title'
-            placeholder='Event title'
-            value={values.title}
-            onChange={(e) => handleInputChange(e)}
+      <Formik
+        initialValues={initialValues}
+        onSubmit={(values) => console.log(values)}
+      >
+        <Form className='ui form'>
+          <FormField>
+            <Field name='title' placeholder='Event title' />
+          </FormField>
+          <FormField>
+            <Field name='category' placeholder='Category' />
+          </FormField>
+          <FormField>
+            <Field name='description' placeholder='Description' />
+          </FormField>
+          <FormField>
+            <Field name='city' placeholder='City' />
+          </FormField>
+          <FormField>
+            <Field name='venue' placeholder='Venue' />
+          </FormField>
+          <FormField>
+            <Field name='date' placeholder='Event date' type='date' />
+          </FormField>
+          
+          <Button type='submit' floated='right' content='Submit' positive />
+          <Button
+            type='submit'
+            floated='right'
+            content='Cancel'
+            as={Link}
+            to='/events'
           />
-        </Form.Field>
-        <Form.Field>
-          <input
-            type='text'
-            name='category'
-            placeholder='Category'
-            value={values.category}
-            onChange={(e) => handleInputChange(e)}
-          />
-        </Form.Field>
-        <Form.Field>
-          <input
-            type='text'
-            name='description'
-            placeholder='Description'
-            value={values.description}
-            onChange={(e) => handleInputChange(e)}
-          />
-        </Form.Field>
-        <Form.Field>
-          <input
-            type='text'
-            name='city'
-            placeholder='City'
-            value={values.city}
-            onChange={(e) => handleInputChange(e)}
-          />
-        </Form.Field>
-        <Form.Field>
-          <input
-            type='text'
-            name='venue'
-            placeholder='Venue'
-            value={values.venue}
-            onChange={(e) => handleInputChange(e)}
-          />
-        </Form.Field>
-        <Form.Field>
-          <input
-            type='date'
-            name='date'
-            placeholder='Date'
-            value={values.date}
-            onChange={(e) => handleInputChange(e)}
-          />
-        </Form.Field>
-        <Button type='submit' floated='right' content='Submit' positive />
-        <Button
-          type='submit'
-          floated='right'
-          content='Cancel'
-          as={Link}
-          to='/events'
-        />
-      </Form>
+        </Form>
+      </Formik>
     </Segment>
   );
 };
