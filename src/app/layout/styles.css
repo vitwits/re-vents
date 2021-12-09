@@ -34,3 +34,10 @@ body {
 .react-datepicker-wrapper {
   width: 100%;
 }
+
+.react-datepicker__triangle::after {
+  left: -150px !important;
+}
+.react-datepicker__triangle::before {
+  left: -150px !important;
+}
